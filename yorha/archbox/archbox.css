@@ -1,0 +1,255 @@
+/* ARCHBOX en YoRHa. Los colores (@tan, @marron, @crema, @acento) los define archbox.py según
+   el tema claro u oscuro (el oscuro ya trae marrón y tan invertidos). Esquinas cuadradas y
+   la letra del juego, como ajustes.css; solo afecta a las ventanas de ARCHBOX. */
+
+* {
+  font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif;
+  border-radius: 0;
+  outline-color: alpha(@marron, 0.6);
+  -gtk-outline-radius: 0;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+
+window, dialog, .background, messagedialog, popover, menu, .menu, .context-menu {
+  background-color: @tan;
+  color: @marron;
+}
+label { color: @marron; }
+label:disabled, .dim-label { color: alpha(@marron, 0.55); }
+label selection, entry selection, textview text selection {
+  background-color: @marron;
+  color: @crema;
+}
+tooltip, tooltip.background {
+  background-color: @marron;
+  border: none;
+  box-shadow: none;
+}
+tooltip label { color: @tan; }
+
+/* Barras de título de los diálogos con decoración propia */
+headerbar, .titlebar {
+  background: @marron;
+  color: @tan;
+  border: none;
+  box-shadow: none;
+  min-height: 34px;
+}
+headerbar label, .titlebar label { color: @tan; letter-spacing: 1px; }
+headerbar button, .titlebar button { color: @tan; }
+
+/* Botones: rellenos marrón claro; al pasar, marrón entero (la pestaña del juego) */
+button {
+  background: alpha(@marron, 0.12);
+  color: @marron;
+  border: none;
+  box-shadow: none;
+  padding: 4px 10px;
+  min-height: 22px;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+button:hover, button:checked, button:active,
+button.suggested-action, menubutton button:checked {
+  background: @marron;
+  color: @tan;
+}
+button:hover label, button:checked label, button:active label, button.suggested-action label,
+button:hover image, button:checked image, button:active image {
+  color: @tan;
+}
+button:disabled { background: alpha(@marron, 0.05); color: alpha(@marron, 0.35); }
+button:disabled image, button:disabled label { color: alpha(@marron, 0.35); }
+button.destructive-action, button.destructive-action:hover { background: @acento; color: @crema; }
+button.destructive-action label { color: @crema; }
+button.flat, .herramientas button, button.cerrar-pestana, button.expulsar {
+  background: none;
+  padding: 4px 6px;
+}
+.herramientas button:hover, button.cerrar-pestana:hover, button.expulsar:hover { background: @marron; }
+.herramientas button:hover image, button.expulsar:hover image { color: @tan; }
+.herramientas button:checked { background: @marron; }
+.linked > button { margin: 0; }
+
+/* Barra de herramientas y de estado: franjas con el borde marrón */
+.herramientas {
+  padding: 6px 8px;
+  border-bottom: 2px solid alpha(@marron, 0.35);
+}
+.barra-estado {
+  padding: 4px 10px;
+  border-top: 2px solid alpha(@marron, 0.35);
+  background-color: alpha(@marron, 0.08);
+}
+.barra-estado label { letter-spacing: 1px; }
+
+/* Barra de ruta: cada carpeta es una pestaña; la actual, rellena de marrón */
+.ruta button {
+  background-image: linear-gradient(90deg, alpha(@marron, 0.18) 50%, @marron 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  background-color: transparent;
+  margin-right: 3px;
+  padding: 4px 10px;
+  transition: background-position 400ms cubic-bezier(0.15, 0.79, 0, 1);
+}
+.ruta button:hover, .ruta button.actual { background-position: 100% 0%; }
+.ruta button.actual label, .ruta button.actual image,
+.ruta button:hover label, .ruta button:hover image { color: @tan; }
+.ruta button label { letter-spacing: 1px; }
+
+/* Entradas de texto */
+entry, spinbutton:not(.vertical) {
+  background: @crema;
+  color: @marron;
+  border: none;
+  border-bottom: 2px solid alpha(@marron, 0.5);
+  box-shadow: none;
+  caret-color: @marron;
+  padding: 4px 8px;
+  min-height: 24px;
+}
+entry:focus, spinbutton:focus { border-bottom-color: @marron; }
+entry image { color: @marron; }
+entry.error, entry.ubicacion.error { border-bottom-color: @acento; color: @acento; }
+spinbutton button { background: none; border: none; }
+.aviso { color: @acento; }
+
+/* Vistas: fondo crema; lo seleccionado, marrón con letra crema. Colores opacos: el IconView
+   pinta el fondo dos veces y con transparencia se vería una franja */
+iconview, treeview.view, .vista, list, textview text {
+  background-color: mix(@tan, @crema, 0.75);
+  color: @marron;
+}
+iconview:selected, iconview:selected:focus, treeview.view:selected, treeview.view:selected:focus,
+.vista:selected, list row:selected {
+  background-color: @marron;
+  color: @crema;
+}
+iconview:hover:not(:selected), treeview.view:hover:not(:selected) { background-color: alpha(@marron, 0.12); }
+treeview.view:drop(active), iconview:drop(active) { box-shadow: inset 0 0 0 2px @acento; }
+.rubberband, rubberband, iconview.view.rubberband, treeview.view.rubberband {
+  background-color: alpha(@marron, 0.18);
+  border: 1px solid @marron;
+}
+treeview.view header button {
+  background: @tan;
+  color: @marron;
+  border-bottom: 2px solid alpha(@marron, 0.35);
+  border-right: 1px solid alpha(@marron, 0.15);
+  padding: 4px 8px;
+}
+treeview.view header button:hover { background: @marron; color: @tan; }
+treeview.view header button:hover label { color: @tan; }
+.aviso-vista { color: alpha(@marron, 0.7); padding: 30px; }
+
+/* Panel lateral: secciones con título en mayúsculas espaciadas, como las fichas */
+.lugares, .lugares list { background-color: alpha(@marron, 0.07); }
+.lugares .seccion {
+  padding: 12px 10px 4px 10px;
+  font-size: 85%;
+  letter-spacing: 2px;
+  color: alpha(@marron, 0.75);
+}
+.lugares row { padding: 4px 10px; border-left: 4px solid transparent; }
+.lugares row:hover { background-color: alpha(@marron, 0.12); }
+.lugares row:selected { background-color: @marron; border-left-color: @acento; }
+.lugares row:selected label, .lugares row:selected image { color: @tan; }
+.lugares row:drop(active) { box-shadow: inset 0 0 0 2px @acento; }
+levelbar trough { background: alpha(@marron, 0.2); border: none; padding: 0; min-height: 3px; }
+levelbar block { border: none; min-height: 3px; }
+levelbar block.filled, levelbar block.low, levelbar block.high { background: @marron; }
+levelbar block.full { background: @acento; }
+.lugares row:selected levelbar block.filled { background: @tan; }
+.lugares row:selected levelbar trough { background: alpha(@tan, 0.3); }
+paned > separator { background: alpha(@marron, 0.35); min-width: 2px; min-height: 2px; }
+
+/* Pestañas */
+notebook > header {
+  background: @tan;
+  border: none;
+  box-shadow: inset 0 -2px alpha(@marron, 0.35);
+  padding: 0;
+}
+notebook > header tab {
+  padding: 4px 8px;
+  border: none;
+  border-top: 3px solid transparent;
+  background: alpha(@marron, 0.1);
+  margin: 0 2px 0 0;
+}
+notebook > header tab:hover { background: alpha(@marron, 0.2); }
+notebook > header tab:checked { background: alpha(@crema, 0.75); border-top-color: @marron; }
+notebook > header tab, notebook > header tab:checked { box-shadow: none; }
+notebook > header tab label { padding: 0 2px; }
+notebook > stack:not(:only-child) { background: transparent; }
+notebook { padding: 0; border: none; }
+/* Vista dividida: el lado sin el foco, atenuado */
+notebook.inactivo .vista { background-color: mix(@tan, @crema, 0.35); color: alpha(@marron, 0.75); }
+scrolledwindow undershoot, scrolledwindow overshoot { background: none; box-shadow: none; }
+
+/* Búsqueda */
+.busqueda { padding: 6px 8px; background-color: alpha(@marron, 0.1); border-bottom: 2px solid alpha(@marron, 0.35); }
+
+/* Casillas */
+check, radio {
+  background: @crema;
+  border: 2px solid @marron;
+  color: @crema;
+  min-width: 14px;
+  min-height: 14px;
+  box-shadow: none;
+  background-image: none;
+}
+check:checked, radio:checked { background-color: @marron; }
+check:disabled, radio:disabled { opacity: 0.45; }
+
+/* Menús y ventanas emergentes */
+menu, .menu, .context-menu, popover {
+  border: 2px solid @marron;
+  padding: 4px 0;
+  box-shadow: none;
+}
+popover { padding: 6px; }
+menu menuitem, .menu menuitem { padding: 5px 14px; color: @marron; }
+menu menuitem:hover, .menu menuitem:hover { background-color: @marron; }
+menu menuitem:hover label, menu menuitem:hover accelerator, menu menuitem:hover arrow,
+.menu menuitem:hover label { color: @tan; }
+menu menuitem:disabled label { color: alpha(@marron, 0.4); }
+menu menuitem:hover check, menu menuitem:hover radio { border-color: @tan; }
+menu menuitem:hover check:checked, menu menuitem:hover radio:checked { background: @tan; color: @marron; }
+menu accelerator { color: alpha(@marron, 0.6); }
+menu separator, popover separator { background: alpha(@marron, 0.3); min-height: 1px; margin: 3px 0; }
+modelbutton { color: @marron; padding: 4px 12px; }
+modelbutton:hover { background: @marron; color: @tan; }
+/* GTK pinta la letra con la regla de label, no con la del botón: al pasar hay que aclararla
+   aparte o queda marrón sobre marrón */
+modelbutton:hover label, modelbutton:hover accelerator, modelbutton:hover arrow { color: @tan; }
+/* Casillas opacas como las de los diálogos (crema con borde marrón; marcadas, marrón con la
+   señal crema). Al pasar, el fondo de la fila es marrón: se invierten para no fundirse con él */
+modelbutton check, modelbutton radio { background: @crema; border-color: @marron; color: @crema; }
+modelbutton check:checked, modelbutton radio:checked { background: @marron; color: @crema; }
+modelbutton:hover check, modelbutton:hover radio { background: @crema; border-color: @tan; color: @crema; }
+modelbutton:hover check:checked, modelbutton:hover radio:checked { background: @tan; color: @marron; }
+
+/* Barras de desplazamiento finas */
+scrollbar { background: transparent; border: none; }
+scrollbar slider { background: alpha(@marron, 0.45); min-width: 6px; min-height: 6px; border: none; }
+scrollbar slider:hover { background: @marron; }
+
+/* Progreso de las operaciones: segmentos como el deslizador de volumen del panel */
+progressbar trough {
+  min-height: 10px;
+  border: none;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(90deg, alpha(@marron, 0.25) 0px, alpha(@marron, 0.25) 4px, transparent 4px, transparent 7px);
+}
+progressbar progress {
+  min-height: 10px;
+  border: none;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(90deg, @marron 0px, @marron 4px, transparent 4px, transparent 7px);
+}
+.titulo-trabajo, .titulo-dialogo { letter-spacing: 1px; font-weight: bold; }
+.propiedades .clave { color: alpha(@marron, 0.75); }
+combobox button, appchooserbutton button { background: @crema; }

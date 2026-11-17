@@ -1,0 +1,105 @@
+/* Visor de imágenes (visor.py) con el escritorio YoRHa. Colores de hyprland-yorha, como
+   barra.css; el tema oscuro invierte marrón y tan. Esquinas rectas.
+   visor.py pone las clases visor y claro u oscuro en su ventana (window.visor.oscuro) y en
+   sus diálogos y menú, que en GTK no son nodos window (dialog, messagedialog): por eso las
+   reglas van por clase, .visor.oscuro, sin el nombre del nodo. */
+@define-color tan     #c2bda6;
+@define-color marron  #48463d;
+@define-color crema   #f4f0e1;
+@define-color acento  #cd664d;
+
+.visor, .visor * { font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif; }
+.visor { background-color: @tan; color: @marron; }
+.visor label { letter-spacing: 1px; }
+
+/* Barra de arriba: botones cuadrados que se rellenan de marrón, como las pestañas */
+.visor .barra { padding: 6px 10px; border-bottom: 3px solid @marron; }
+.visor .barra separator { min-width: 2px; margin: 8px 6px; background-color: alpha(@marron, 0.35); }
+.visor .estado { font-size: 13pt; }
+
+.visor button {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  background-image: none;
+  background-color: alpha(@marron, 0.12);
+  color: @marron;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+.visor .barra button { padding: 6px; background-color: transparent; }
+.visor button:hover, .visor button:active, .visor button:checked { background-color: @marron; color: @tan; }
+.visor button:hover label, .visor button:active label { color: @tan; }
+.visor button:disabled { opacity: 0.45; }
+
+/* La imagen, sobre un fondo un poco más claro; en pantalla completa, el tan del fondo */
+.visor .lienzo { background-color: mix(@tan, @crema, 0.45); }
+.visor.completa .lienzo { background-color: @tan; }
+
+/* Miniaturas: la actual enmarcada arriba y abajo, como un botón elegido del menú */
+.visor .tira { border-top: 3px solid @marron; background-color: alpha(@marron, 0.12); }
+.visor .tira scrollbar { opacity: 0.6; }
+.visor button.miniatura {
+  margin: 6px 0;
+  padding: 3px;
+  background-color: transparent;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.visor button.miniatura:hover { background-color: alpha(@marron, 0.25); }
+.visor button.miniatura.actual { border-color: @marron; background-color: alpha(@marron, 0.35); }
+.visor button.miniatura.actual:hover { background-color: alpha(@marron, 0.45); }
+
+/* Fichas sobre la imagen (información y avisos), como el recuadro de ayuda del juego */
+.visor .ficha {
+  padding: 12px 20px;
+  background-color: alpha(@crema, 0.92);
+  border-left: 10px solid @marron;
+  border-right: 3px solid @marron;
+}
+.visor .ficha label { color: @marron; }
+.visor .ficha .clave { color: alpha(@marron, 0.65); }
+
+/* Diálogos (papelera, abrir con, abrir archivo) y menú */
+.visor entry {
+  border: none;
+  border-bottom: 3px solid @marron;
+  border-radius: 0;
+  box-shadow: none;
+  background: alpha(@marron, 0.12);
+  color: @marron;
+  caret-color: @marron;
+}
+.visor treeview, .visor list, .visor viewport, .visor scrolledwindow { background-color: alpha(@crema, 0.6); color: @marron; }
+.visor treeview:selected, .visor list row:selected, .visor menuitem:hover { background-color: @marron; color: @tan; }
+.visor menu, .visor .menu { background-color: @tan; border: 2px solid @marron; border-radius: 0; padding: 4px 0; }
+.visor menuitem { padding: 6px 18px; color: @marron; }
+.visor menuitem:hover label { color: @tan; }
+.visor .titlebar, .visor headerbar { background: @tan; border-radius: 0; box-shadow: none; color: @marron; }
+tooltip.background { background-color: @marron; color: @tan; border-radius: 0; }
+tooltip label { color: @tan; }
+
+/* --- Tema oscuro: marrón de fondo y tan para el texto ---------------------------- */
+.visor.oscuro { background-color: @marron; color: @tan; }
+.visor.oscuro .barra { border-bottom-color: @tan; }
+.visor.oscuro .barra separator { background-color: alpha(@tan, 0.35); }
+.visor.oscuro button { background-color: alpha(@tan, 0.12); color: @tan; }
+.visor.oscuro .barra button, .visor.oscuro button.miniatura { background-color: transparent; }
+.visor.oscuro button:hover, .visor.oscuro button:active, .visor.oscuro button:checked { background-color: @tan; color: @marron; }
+.visor.oscuro button:hover label, .visor.oscuro button:active label { color: @marron; }
+.visor.oscuro .lienzo { background-color: shade(@marron, 0.8); }
+.visor.oscuro.completa .lienzo { background-color: @marron; }
+.visor.oscuro .tira { border-top-color: @tan; background-color: alpha(@tan, 0.08); }
+.visor.oscuro button.miniatura:hover { background-color: alpha(@tan, 0.2); }
+.visor.oscuro button.miniatura.actual { border-color: @tan; background-color: alpha(@tan, 0.25); }
+.visor.oscuro .ficha { background-color: alpha(shade(@marron, 0.7), 0.92); border-color: @tan; }
+.visor.oscuro .ficha label { color: @tan; }
+.visor.oscuro .ficha .clave { color: alpha(@tan, 0.65); }
+.visor.oscuro entry { border-bottom-color: @tan; background: alpha(@tan, 0.12); color: @tan; caret-color: @tan; }
+.visor.oscuro treeview, .visor.oscuro list, .visor.oscuro viewport, .visor.oscuro scrolledwindow { background-color: shade(@marron, 0.8); color: @tan; }
+.visor.oscuro treeview:selected, .visor.oscuro list row:selected, .visor.oscuro menuitem:hover { background-color: @tan; color: @marron; }
+.visor.oscuro menu, .visor.oscuro .menu { background-color: @marron; border-color: @tan; }
+.visor.oscuro menuitem { color: @tan; }
+.visor.oscuro menuitem:hover label { color: @marron; }
+.visor.oscuro .titlebar, .visor.oscuro headerbar { background: @marron; color: @tan; }

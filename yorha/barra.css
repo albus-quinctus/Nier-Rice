@@ -1,0 +1,139 @@
+/* Barra YoRHa — colores de hyprland-yorha: tan #c2bda6, marrón #48463d, crema #f4f0e1 */
+@define-color tan     #c2bda6;
+@define-color marron  #48463d;
+@define-color crema   #f4f0e1;
+@define-color acento  #cd664d;
+
+window.yorha { background-color: transparent; }
+.fila { margin: 10px 14px 0 14px; }
+
+/* Pestaña: cuadrado y nombre sobre un fondo al 25 % que se rellena de marrón de
+   izquierda a derecha, como las pestañas MAPA, MISIÓN… del menú del juego */
+button.largo {
+  border: none;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  background: none;
+  transition: border-color 300ms ease-in-out, padding 300ms ease-in-out;
+}
+button.largo .pestana {
+  padding: 8px 8px 7px 8px;
+  background-image: linear-gradient(90deg, alpha(@marron, 0.25) 50%, @marron 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 400ms cubic-bezier(0.15, 0.79, 0, 1), padding 300ms ease-in-out;
+}
+button.largo label {
+  font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif;
+  font-size: 14pt;
+  letter-spacing: 1px;
+  color: @marron;
+  transition: color 300ms ease-in-out;
+}
+button.largo .cuadro {
+  min-width: 14px;
+  min-height: 14px;
+  background-color: @marron;
+  transition: background-color 300ms ease-in-out;
+}
+
+/* Al pasar el ratón o en el escritorio activo: bordes arriba y abajo y relleno oscuro */
+.escritorio.encima button.largo,
+.escritorio.activo button.largo {
+  border-top-color: @marron;
+  border-bottom-color: @marron;
+  padding: 4px 0;
+}
+.escritorio.encima button.largo .pestana,
+.escritorio.activo button.largo .pestana { background-position: 100% 0%; }
+.escritorio.encima button.largo label,
+.escritorio.activo button.largo label { color: @tan; }
+.escritorio.encima button.largo .cuadro,
+.escritorio.activo button.largo .cuadro { background-color: @tan; }
+/* La activa además "se hunde" hasta la franja, como la pestaña elegida del juego */
+.escritorio.activo button.largo .pestana { padding-bottom: 19px; }
+
+.escritorio:not(.ocupado):not(.activo) button.largo label { color: alpha(@marron, 0.55); }
+.escritorio:not(.ocupado):not(.activo) button.largo .cuadro { background-color: alpha(@marron, 0.45); }
+.escritorio.urgente button.largo .pestana { background-image: linear-gradient(90deg, alpha(@acento, 0.5) 50%, @acento 50%); }
+
+.puntero { opacity: 0; transition: opacity 300ms ease-in-out; }
+.escritorio.encima .puntero, .escritorio.activo .puntero { opacity: 1; }
+
+/* Tema oscuro: se invierten marrón y tan */
+window.oscuro button.largo .pestana { background-image: linear-gradient(90deg, alpha(@tan, 0.25) 50%, @tan 50%); }
+window.oscuro button.largo label { color: @tan; }
+window.oscuro button.largo .cuadro { background-color: @tan; }
+window.oscuro .escritorio.encima button.largo,
+window.oscuro .escritorio.activo button.largo { border-top-color: @tan; border-bottom-color: @tan; }
+window.oscuro .escritorio.encima button.largo label,
+window.oscuro .escritorio.activo button.largo label { color: @marron; }
+window.oscuro .escritorio.encima button.largo .cuadro,
+window.oscuro .escritorio.activo button.largo .cuadro { background-color: @marron; }
+window.oscuro .escritorio:not(.ocupado):not(.activo) button.largo label { color: alpha(@tan, 0.55); }
+window.oscuro .escritorio:not(.ocupado):not(.activo) button.largo .cuadro { background-color: alpha(@tan, 0.45); }
+
+/* Pestaña SISTEMA (la séptima): hora y batería; se pone roja con poca batería */
+.escritorio.sistema.bajo button.largo .pestana,
+window.oscuro .escritorio.sistema.bajo button.largo .pestana { background-image: linear-gradient(90deg, @acento 50%, @acento 50%); }
+.escritorio.sistema.bajo button.largo label,
+window.oscuro .escritorio.sistema.bajo button.largo label { color: @crema; }
+.escritorio.sistema.bajo button.largo .cuadro,
+window.oscuro .escritorio.sistema.bajo button.largo .cuadro { background-color: @crema; }
+
+/* Ventana nueva: dos trazos que se despliegan del centro a las esquinas y se desvanecen */
+window.efecto { background-color: transparent; opacity: 1; transition: opacity 350ms ease-in; }
+window.efecto.fuera { opacity: 0; }
+.trazo {
+  border-top: 3px solid @marron;
+  background-image: repeating-linear-gradient(90deg, alpha(@marron, 0.55) 0px, alpha(@marron, 0.55) 6px, transparent 6px, transparent 10px);
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
+  background-position: 0 3px;
+  transition: margin 300ms cubic-bezier(0.15, 0.79, 0, 1);
+}
+.trazo.abierto { margin: 0; }
+window.efecto.oscuro .trazo {
+  border-top-color: @tan;
+  background-image: repeating-linear-gradient(90deg, alpha(@tan, 0.55) 0px, alpha(@tan, 0.55) 6px, transparent 6px, transparent 10px);
+}
+
+/* Aviso de volumen y brillo */
+window.aviso { background-color: transparent; opacity: 0; transition: opacity 200ms ease-out; }
+window.aviso.visible { opacity: 1; }
+.tarjeta {
+  min-width: 420px;
+  padding: 14px 18px 16px 18px;
+  background-color: alpha(@tan, 0.94);
+  border-top: 3px solid @marron;
+  border-bottom: 3px solid @marron;
+}
+.tarjeta label { font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif; font-size: 15pt; color: @marron; }
+.tarjeta .cuadro { min-width: 14px; min-height: 14px; background-color: @marron; }
+.segmento { min-height: 12px; background-color: alpha(@marron, 0.22); transition: background-color 120ms; }
+.segmento.lleno { background-color: @marron; }
+window.aviso.silencio .segmento.lleno { background-color: alpha(@marron, 0.45); }
+window.aviso.oscuro .tarjeta { background-color: alpha(@marron, 0.94); border-color: @tan; }
+window.aviso.oscuro .tarjeta label { color: @tan; }
+window.aviso.oscuro .tarjeta .cuadro { background-color: @tan; }
+window.aviso.oscuro .segmento { background-color: alpha(@tan, 0.22); }
+window.aviso.oscuro .segmento.lleno { background-color: @tan; }
+window.aviso.oscuro.silencio .segmento.lleno { background-color: alpha(@tan, 0.45); }
+
+/* Deslizamiento al cambiar de escritorio: solo la captura se ve; el resto de la capa, transparente */
+window.deslizamiento { background-color: transparent; }
+
+/* Bandeja: los iconos de los programas en una caja como una pestaña sin elegir, a la derecha */
+.bandeja-yorha {
+  min-height: 58px;
+  margin: 3px 0 0 18px;
+  padding: 0 8px;
+  background-color: alpha(@marron, 0.25);
+}
+.bandeja-yorha button { border: none; border-radius: 0; box-shadow: none; background: none; padding: 0 5px; min-height: 0; }
+.bandeja-yorha button:hover { background-color: alpha(@marron, 0.35); }
+window.oscuro .bandeja-yorha { background-color: alpha(@tan, 0.25); }
+window.oscuro .bandeja-yorha button:hover { background-color: alpha(@tan, 0.35); }

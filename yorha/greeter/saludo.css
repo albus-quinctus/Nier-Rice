@@ -1,0 +1,93 @@
+/* Pantalla de inicio YoRHa (tema claro). Colores de hyprland-yorha, como barra.css.
+   saludo.py añade debajo la imagen de fondo (fondos/yorha-claro.png). */
+@define-color tan     #c2bda6;
+@define-color marron  #48463d;
+@define-color crema   #f4f0e1;
+@define-color acento  #cd664d;
+
+* { font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif; outline-width: 0; border-radius: 0; }
+label { letter-spacing: 1px; color: @marron; }
+
+window.saludo {
+  background-color: #cdc8b0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Arriba, sobre la franja del fondo: hora grande con su sombra, fecha y marca */
+.cabecera { min-height: 92px; padding: 0 40px; }
+.hora { font-size: 54px; letter-spacing: 6px; text-shadow: 5px 5px alpha(@marron, 0.25); }
+.fecha { font-size: 18px; letter-spacing: 3px; padding-top: 10px; }
+.marca { font-size: 16px; letter-spacing: 4px; padding-top: 10px; color: alpha(@marron, 0.75); }
+
+/* Ficha central como los recuadros de detalle del menú del juego */
+.tarjeta {
+  min-width: 560px;
+  padding: 0 0 26px 0;
+  background-color: alpha(@crema, 0.80);
+  border-top: 3px solid @marron;
+  border-bottom: 3px solid @marron;
+}
+.tarjeta > * { margin-left: 32px; margin-right: 32px; }
+.tarjeta > .titulo {
+  margin: 0 0 22px 0;
+  padding: 12px 32px;
+  background-color: alpha(@marron, 0.22);
+}
+.titulo-texto { font-size: 22px; letter-spacing: 4px; }
+.cuadro { min-width: 14px; min-height: 14px; background-color: @marron; }
+
+/* Usuarios: pestañas que se rellenan de marrón, como las de la barra */
+button.usuario, button.energia {
+  border: none;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  box-shadow: none;
+  padding: 8px 18px;
+  background-image: linear-gradient(90deg, alpha(@marron, 0.20) 50%, @marron 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 400ms cubic-bezier(0.15, 0.79, 0, 1), border-color 300ms;
+}
+button.usuario label, button.energia label { font-size: 17px; letter-spacing: 2px; color: @marron; }
+button.usuario:hover, button.energia:hover { border-top-color: @marron; border-bottom-color: @marron; }
+button.usuario.elegido, button.energia:active { background-position: 100% 0%; }
+button.usuario.elegido label, button.energia:active label { color: @tan; }
+.usuarios { margin-bottom: 22px; }
+
+.pregunta { font-size: 15px; letter-spacing: 3px; margin-bottom: 8px; }
+entry.campo {
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 20px;
+  color: @marron;
+  caret-color: @marron;
+  background-color: alpha(@tan, 0.45);
+  background-image: none;
+  border: none;
+  border-left: 8px solid @marron;
+  box-shadow: none;
+}
+entry.campo:focus { background-color: alpha(@tan, 0.70); }
+entry.campo:disabled { color: alpha(@marron, 0.5); }
+.mayus {
+  margin-top: 10px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: @crema;
+  background-color: @acento;
+}
+.mensaje { margin-top: 14px; font-size: 15px; }
+.mensaje.error { color: @acento; }
+
+/* Abajo, en la franja inferior: energía a la izquierda y teclas a la derecha */
+.pie {
+  margin: 0 40px 12px 40px;
+  padding: 8px 18px;
+  background-color: alpha(@crema, 0.85);
+  border-left: 14px solid @marron;
+}
+button.energia { padding: 4px 14px; }
+button.energia label { font-size: 14px; }
+.accion { font-size: 14px; margin-right: 14px; }
+.tecla { font-size: 13px; padding: 0 8px; border: 2px solid @marron; border-radius: 12px; }

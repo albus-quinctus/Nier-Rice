@@ -1,0 +1,29 @@
+/* Buscador de aplicaciones (lanzador.py). Se carga después de ajustes.css, del que toma
+   botones, títulos, buscador y barra de ayuda; aquí solo va lo propio de la ficha. */
+
+/* Fondo atenuado y ficha que aparece fundiéndose y subiendo un poco */
+window.buscador { background-color: alpha(@marron, 0.35); opacity: 0; transition: opacity 200ms ease-out; }
+window.buscador.visible { opacity: 1; }
+.ficha {
+  margin-top: 60px;
+  padding: 34px 0 28px 0;
+  background-color: alpha(@tan, 0.97);
+  border-top: 4px solid @marron;
+  border-bottom: 4px solid @marron;
+  transition: margin 300ms cubic-bezier(0.15, 0.79, 0, 1);
+}
+window.buscador.visible .ficha { margin-top: 0; }
+.lista-apps { margin: 4px 0 0 0; }
+.lista-apps .boton .caja { margin-right: 30px; }
+.lista-apps .boton.encima .caja { margin-right: 0; }
+
+/* Ficha de detalle, como los recuadros de la derecha del inventario */
+.detalle {
+  margin: 0 34px 0 10px;
+  padding-bottom: 20px;
+  background-color: alpha(@crema, 0.45);
+  border-top: 2px solid alpha(@marron, 0.35);
+}
+.detalle .icono { margin: 10px 0 18px 30px; }
+.detalle .texto { color: @marron; padding: 0 30px 12px 30px; }
+.detalle .tipo { color: alpha(@marron, 0.7); }

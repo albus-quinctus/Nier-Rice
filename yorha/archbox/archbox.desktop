@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=ARCHBOX
+GenericName=Gestor de archivos
+Comment=Explorar el sistema de archivos y gestionar los archivos
+Exec=python3 -I /srv/nier/yorha/archbox/archbox.py %U
+Icon=system-file-manager
+Terminal=false
+StartupNotify=true
+Categories=System;FileTools;FileManager;
+Keywords=archivos;carpetas;explorador;gestor;navegador;papelera;
+MimeType=inode/directory;
+DBusActivatable=false
