@@ -1,0 +1,168 @@
+/* Panel de ajustes YoRHa. Los colores (@tan, @marron, @crema, @acento) los define
+   ajustes.py según el tema; los tamaños de letra dependen de la pantalla. */
+
+/* Como el menú del juego, el panel tapa el escritorio con el mismo fondo YoRHa
+   (ajustes.py pone la imagen) y aparece fundiéndose; la barra queda arriba como pestañas */
+window.ajustes { background-color: @tan; opacity: 0; transition: opacity 220ms ease-out; }
+window.ajustes.visible { opacity: 1; }
+
+/* Cuadrícula de fondo: cada celda se enciende con un retraso al azar y luego queda tenue */
+.celda { margin: 2px; background-color: alpha(@marron, 0); transition: background-color 350ms ease-out; }
+.cuadricula.encendida .celda { background-color: alpha(@marron, 0.12); }
+.cuadricula.encendida.asentada .celda { background-color: alpha(@marron, 0); transition-duration: 600ms; }
+.celda.d1 { transition-delay: 40ms; }
+.celda.d2 { transition-delay: 80ms; }
+.celda.d3 { transition-delay: 120ms; }
+.celda.d4 { transition-delay: 160ms; }
+.celda.d5 { transition-delay: 200ms; }
+.celda.d6 { transition-delay: 240ms; }
+.celda.d7 { transition-delay: 280ms; }
+
+* { font-family: "FOT-Rodin Pro", "DejaVu Sans", sans-serif; outline-width: 0; }
+label { letter-spacing: 1px; }
+
+/* En las fichas, cada elemento aparece un poco después del anterior (la primera columna
+   no: se llena antes de mostrarse y GTK dejaría la animación parada en transparente) */
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+.columna2 .contenido > *, .columna3 .contenido > *, .columna4 .contenido > *,
+.columna2 .contenido > * > *, .columna3 .contenido > * > *, .columna4 .contenido > * > * {
+  animation: aparecer 240ms ease-out backwards;
+}
+.contenido > :nth-child(2), .contenido > * > :nth-child(2) { animation-delay: 50ms; }
+.contenido > :nth-child(3), .contenido > * > :nth-child(3) { animation-delay: 100ms; }
+.contenido > :nth-child(4), .contenido > * > :nth-child(4) { animation-delay: 150ms; }
+.contenido > :nth-child(5), .contenido > * > :nth-child(5) { animation-delay: 200ms; }
+.contenido > :nth-child(n+6), .contenido > * > :nth-child(n+6) { animation-delay: 250ms; }
+
+/* Columnas en cascada: la primera va sobre el fondo y las demás son fichas claras,
+   como los recuadros de detalle del menú del juego */
+.columna { margin-bottom: 150px; transition: margin 300ms cubic-bezier(0.15, 0.79, 0, 1), opacity 300ms ease; }
+.columna.cerrada { opacity: 0; margin-left: -120px; margin-right: 120px; }
+.contenido { padding: 40px 0 20px 0; }
+.columna2 .contenido, .columna3 .contenido, .columna4 .contenido {
+  margin: 40px 24px 0 0;
+  padding: 0 0 18px 0;
+  background-color: alpha(@crema, 0.45);
+  border-top: 2px solid alpha(@marron, 0.35);
+}
+.columna3 .contenido { background-color: alpha(@crema, 0.35); }
+.columna4 .contenido { background-color: alpha(@crema, 0.28); }
+scrollbar { opacity: 0; min-width: 0; }
+
+/* Títulos: el grande con su sombra desplazada, como "ARMAS"; el de cada ficha, en una franja */
+.titulo { color: @marron; padding: 0 0 18px 35px; }
+.titulo1 { letter-spacing: 4px; text-shadow: 5px 5px alpha(@marron, 0.25); }
+.titulo2 {
+  padding: 10px 20px;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+  background-color: alpha(@marron, 0.22);
+}
+
+/* Raíl vertical a la izquierda de la lista, por donde corre el puntero */
+.lista { border-left: 8px solid alpha(@marron, 0.22); margin: 0 0 22px 22px; padding-top: 6px; }
+.aviso { color: alpha(@marron, 0.7); padding: 4px 30px 16px 35px; font-size: 18px; }
+.cancion { color: @marron; padding: 0 30px 2px 35px; font-size: 24px; }
+
+/* Botón NieR */
+.boton { margin: 0 0 14px 0; }
+.boton .puntero { opacity: 0; margin-left: -6px; margin-right: 6px; transition: opacity 300ms ease-in-out; }
+.boton.encima .puntero, .boton.elegido .puntero { opacity: 1; }
+/* El puntero parpadea al llegar, como el cursor del juego */
+@keyframes parpadeo { 0% { opacity: 0; } 25% { opacity: 1; } 45% { opacity: 0.2; } 70% { opacity: 1; } }
+.boton.encima .puntero { animation: parpadeo 320ms linear; }
+.boton .caja { margin-right: 50px; transition: margin 150ms ease-out; }
+.boton.elegido .caja { margin-right: 0; }
+.boton .borde {
+  min-height: 4px;
+  margin: 3px 0;
+  background-image: linear-gradient(90deg, transparent 50%, @marron 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 300ms ease-out;
+}
+.boton.encima .borde, .boton.elegido .borde { background-position: 100% 0%; }
+.boton .cuerpo {
+  padding: 8px 12px 7px 10px;
+  background-image: linear-gradient(90deg, alpha(@marron, 0.25) 50%, @marron 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 400ms cubic-bezier(0.15, 0.79, 0, 1);
+}
+.boton.encima .cuerpo, .boton.elegido .cuerpo { background-position: 100% 0%; }
+.boton label { color: @marron; transition: color 200ms ease-in-out; }
+.boton.encima label, .boton.elegido label { color: @tan; }
+.boton .valor { opacity: 0.8; }
+.cuadro { min-width: 14px; min-height: 14px; background-color: @marron; transition: background-color 200ms; }
+.boton.encima .cuadro, .boton.elegido .cuadro { background-color: @tan; }
+
+/* Deslizador de volumen con segmentos */
+.deslizador { margin: 0 50px 22px 40px; }
+.deslizador label { color: @marron; }
+.deslizador.silenciado label { color: alpha(@marron, 0.45); }
+scale.nier trough {
+  min-height: 10px;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(90deg, alpha(@marron, 0.35) 0px, alpha(@marron, 0.35) 4px, transparent 4px, transparent 7px);
+}
+scale.nier highlight {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(90deg, @marron 0px, @marron 4px, transparent 4px, transparent 7px);
+}
+scale.nier slider {
+  min-width: 6px;
+  min-height: 22px;
+  margin: -6px 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: @crema;
+  outline: 1px solid @marron;
+}
+.deslizador.silenciado scale.nier highlight { opacity: 0.35; }
+button.mudo { padding: 0 8px; border-radius: 0; border: 2px solid @marron; background: none; box-shadow: none; }
+button.mudo label { color: @marron; font-size: 14px; }
+.deslizador.silenciado button.mudo { background: @marron; }
+.deslizador.silenciado button.mudo label { color: @tan; }
+
+/* Lanzador: buscador y lista de categorías; las aplicaciones salen en la ficha de al lado */
+.lanzador { margin: 0 0 10px 0; }
+entry.buscar {
+  margin: 0 50px 10px 40px;
+  border: none;
+  border-bottom: 3px solid @marron;
+  border-radius: 0;
+  box-shadow: none;
+  background: alpha(@marron, 0.12);
+  color: @marron;
+  caret-color: @marron;
+  padding: 8px 12px;
+  font-size: 20px;
+}
+.boton.app { margin-bottom: 6px; }
+.boton.app label { font-size: 20px; }
+
+/* Pie: hora y tema */
+.pie { margin: 26px 0 0 35px; }
+.hora { color: @marron; }
+.pie .boton { margin-bottom: 0; }
+
+/* Barra de ayuda de abajo: descripción de lo seleccionado y teclas */
+.ayuda {
+  margin: 0 40px 85px 40px;
+  padding: 14px 26px;
+  background-color: alpha(@crema, 0.85);
+  border-left: 14px solid @marron;
+  border-right: 4px solid @marron;
+}
+.ayuda label { color: @marron; }
+.ayuda .tecla {
+  padding: 0 8px;
+  border: 2px solid @marron;
+  border-radius: 12px;
+  font-size: 14px;
+}

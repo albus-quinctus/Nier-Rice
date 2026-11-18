@@ -1,0 +1,13 @@
+# /etc/greetd/config.toml — greetd 0.10 con la pantalla de inicio YoRHa.
+# Lo instala instalar-greetd.sh (la copia anterior queda en /srv/nier/antiguo).
+
+[terminal]
+# Consola donde corre la pantalla de inicio (la de LightDM también era la 7)
+vt = 7
+
+[default_session]
+# sway mínimo que solo muestra saludo.py. Si fallara, cambia esta línea por
+#   command = "agreety --cmd 'sh /srv/nier/yorha/sesion.sh'"
+# (inicio en modo texto) y reinicia greetd: systemctl restart greetd
+command = "sway --config /srv/nier/yorha/greeter/sway.conf"
+user = "_greetd"

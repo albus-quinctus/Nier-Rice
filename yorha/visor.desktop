@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Visor de imágenes
+GenericName=Visor de imágenes
+Comment=Ver imágenes y recorrer las de su carpeta
+Exec=python3 -I /srv/nier/yorha/visor.py %F
+Icon=image-viewer
+Terminal=false
+StartupNotify=false
+Categories=Graphics;Viewer;
+Keywords=imagen;foto;visor;galería;
+MimeType=image/png;image/jpeg;image/gif;image/webp;image/bmp;image/x-bmp;image/tiff;image/svg+xml;image/svg+xml-compressed;image/x-icon;image/vnd.microsoft.icon;image/avif;image/heic;image/heif;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-tga;image/x-xpixmap;image/x-xbitmap;
